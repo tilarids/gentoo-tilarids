@@ -47,7 +47,7 @@ DEPEND="
 		x11-libs/libxcb:0=
 		x11-libs/xcb-util-wm
 	)
-	gui-libs/wlroots:0.21[drm=,libinput=,session=,X=,x11-backend=]
+	gui-libs/wlroots:0.21=[drm=,libinput=,session=,X=,x11-backend=]
 "
 RDEPEND="
 	${DEPEND}
@@ -87,6 +87,12 @@ src_configure() {
 	)
 
 	meson_src_configure
+}
+
+src_install() {
+	meson_src_install
+	insinto /usr/share/xdg-desktop-portal
+	doins "${FILESDIR}/scroll-portals.conf"
 }
 
 pkg_postinst() {
